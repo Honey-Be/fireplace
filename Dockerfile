@@ -11,7 +11,7 @@ RUN apt-get install -yq auto-apt-proxy apt-transport-https apt-utils iproute
 RUN echo "Acquire::http::Proxy \"$CACHING_PROXY\";" | tee -a /etc/apt/apt.conf.d/00proxy
 RUN echo "Acquire::https::Proxy-Auto-Detect \"/usr/bin/auto-apt-proxy\";" | tee -a /etc/apt/apt.conf.d/00proxy
 RUN echo "Acquire::http::Proxy-Auto-Detect \"/usr/bin/auto-apt-proxy\";" | tee /etc/apt/apt.conf.d/auto-apt-proxy.conf
-RUN apt-get install -yq curl
+RUN apt-get install -yq curl build-essential gcc g++
 USER build
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-host $DEFAULT_HOST --default-toolchain nightly
 COPY . /home/build/fireplace
