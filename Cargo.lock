@@ -284,7 +284,7 @@ dependencies = [
 
 [[package]]
 name = "fireplace"
-version = "3.1.1"
+version = "3.1.2"
 dependencies = [
  "fireplace_lib 3.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "font-loader 0.1.4 (registry+https://github.com/rust-lang/crates.io-index)",
