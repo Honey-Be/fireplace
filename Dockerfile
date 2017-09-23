@@ -1,4 +1,4 @@
-FROM debian:jessie-backports
+FROM debian:sid
 ARG DEBIAN_FRONTEND="noninteractive"
 ARG CACHING_PROXY="http://172.17.0.2:3142"
 ARG DEFAULT_HOST="x86_64-unknown-linux-gnu"
