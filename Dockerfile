@@ -20,4 +20,5 @@ RUN chown build:build -R /home/build/fireplace
 USER build
 WORKDIR /home/build/fireplace/fireplace
 RUN find $HOME/.rustup -name bin
-CMD PATH="$PATH:$HOME/.cargo/bin:$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin" && cargo build --release
+CMD PATH="$PATH:$HOME/.cargo/bin" && cargo build --release
+#$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin
