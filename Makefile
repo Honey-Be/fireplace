@@ -20,5 +20,6 @@ docker-clobber:
 install:
 	install target/release/fireplace /usr/local/bin/fireplace
 	install fireplace.yaml /etc/fireplace/fireplace.yaml
-	install fireplace.yaml
 
+checkinstall:
+	checkinstall -y \
