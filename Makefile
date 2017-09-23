@@ -1,5 +1,5 @@
 
-export proxy_addr = 'http://192.168.1.98:3142'
+export proxy_addr = http://192.168.1.98:3142
 
 dummy:
 
