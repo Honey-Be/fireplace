@@ -1,4 +1,4 @@
-FROM debian:sid
+FROM debian:experimental
 ARG DEBIAN_FRONTEND="noninteractive"
 ARG CACHING_PROXY="http://172.17.0.2:3142/"
 ARG DEFAULT_HOST="x86_64-unknown-linux-gnu"
@@ -11,14 +11,13 @@ RUN apt-get install -yq auto-apt-proxy apt-transport-https apt-utils iproute
 RUN echo "Acquire::http::Proxy \"$CACHING_PROXY\";" | tee -a /etc/apt/apt.conf.d/00proxy
 RUN echo "Acquire::https::Proxy-Auto-Detect \"/usr/bin/auto-apt-proxy\";" | tee -a /etc/apt/apt.conf.d/00proxy
 RUN echo "Acquire::http::Proxy-Auto-Detect \"/usr/bin/auto-apt-proxy\";" | tee /etc/apt/apt.conf.d/auto-apt-proxy.conf
-RUN apt-get install -yq curl build-essential clang
+RUN apt-get install -yq curl build-essential clang rustc cargo rust-src
 USER build
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-host $DEFAULT_HOST --default-toolchain nightly
 COPY . /home/build/fireplace
 USER root
 RUN chown build:build -R /home/build/fireplace
 USER build
-WORKDIR /home/build/fireplace/fireplace
-RUN find $HOME/.rustup -name bin
-CMD PATH="$PATH:$HOME/.cargo/bin" && cargo build --release
+WORKDIR /home/build/fireplace/
+CMD PATH="$PATH:$HOME/.cargo/bin" && make docker-deb
 #$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin
