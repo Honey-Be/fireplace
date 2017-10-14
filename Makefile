@@ -4,7 +4,7 @@
 dummy:
 
 clean:
-	rm -rf doc-pak
+	rm -rf doc-pak description-pak
 	cargo clean
 	cd fireplace && cargo clean && cd ../
 
