@@ -1,7 +1,7 @@
 FROM debian:experimental
 ARG DEBIAN_FRONTEND="noninteractive"
 ARG CACHING_PROXY="http://172.17.0.2:3142/"
-ARG DEFAULT_HOST="x86_64-unknown-linux-gnu"
+ARG DEFAULT_HOST="x86_64-unknown-linux-musl"
 ENV DEBIAN_FRONTEND="noninteractive" LANG="C.UTF-8" LC_ALL="C.UTF-8"
 RUN adduser --home /home/build --shell /bin/bash --disabled-password --gecos "build" build
 RUN adduser build sudo
@@ -29,5 +29,6 @@ RUN chown build:build -R /home/build/fireplace
 USER build
 WORKDIR /home/build/fireplace/
 RUN ls /usr/lib/
-CMD PATH="$PATH:$HOME/.cargo/bin" && make docker-deb
+RUN PATH="$PATH:$HOME/.cargo/bin" && make docker-deb
+CMD bash
 #$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin
