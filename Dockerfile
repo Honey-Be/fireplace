@@ -12,7 +12,7 @@ RUN apt-get install -yq auto-apt-proxy apt-transport-https apt-utils iproute
 #RUN echo "Acquire::http::Proxy \"$CACHING_PROXY\";" | tee -a /etc/apt/apt.conf.d/00proxy
 #RUN echo "Acquire::https::Proxy-Auto-Detect \"/usr/bin/auto-apt-proxy\";" | tee -a /etc/apt/apt.conf.d/00proxy
 #RUN echo "Acquire::http::Proxy-Auto-Detect \"/usr/bin/auto-apt-proxy\";" | tee /etc/apt/apt.conf.d/auto-apt-proxy.conf
-RUN apt-get install -yq curl build-essential clang rustc cargo rust-src libsystemd-dev libfontconfig1-dev git cmake libclang-dev libxcb-*-dev
+RUN apt-get install -yq curl build-essential clang libsystemd-dev libfontconfig1-dev git cmake libclang-dev libxcb-*-dev
 RUN apt-get build-dep -yq weston
 RUN git clone https://github.com/Cloudef/wlc.git && \
         cd wlc && \
@@ -22,7 +22,7 @@ RUN git clone https://github.com/Cloudef/wlc.git && \
         cmake -DCMAKE_BUILD_TYPE=Upstream .. && \
         make install
 USER build
-#RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-host $DEFAULT_HOST --default-toolchain nightly
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-host $DEFAULT_HOST --default-toolchain nightly
 COPY . /home/build/fireplace
 USER root
 RUN chown build:build -R /home/build/fireplace
