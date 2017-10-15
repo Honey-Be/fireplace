@@ -1,7 +1,7 @@
 FROM debian:experimental
 ARG DEBIAN_FRONTEND="noninteractive"
 ARG CACHING_PROXY="http://172.17.0.2:3142/"
-ARG DEFAULT_HOST="x86_64-unknown-linux-musl"
+ARG DEFAULT_HOST="x86_64-unknown-linux-gnu"
 ENV DEBIAN_FRONTEND="noninteractive" LANG="C.UTF-8" LC_ALL="C.UTF-8"
 RUN adduser --home /home/build --shell /bin/bash --disabled-password --gecos "build" build
 RUN adduser build sudo
@@ -22,7 +22,10 @@ RUN git clone https://github.com/Cloudef/wlc.git && \
         cmake -DCMAKE_BUILD_TYPE=Upstream .. && \
         make install
 USER build
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-host $DEFAULT_HOST --default-toolchain nightly
+RUN curl https://sh.rustup.rs -sSf \
+        | sh -s -- -y --default-host $DEFAULT_HOST --default-toolchain nightly
+RUN rustup toolchain add nightly-x86_64-unknown-linux-musl
+RUN false #
 COPY . /home/build/fireplace
 USER root
 RUN chown build:build -R /home/build/fireplace
