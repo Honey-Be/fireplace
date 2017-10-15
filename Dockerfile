@@ -24,8 +24,7 @@ RUN git clone https://github.com/Cloudef/wlc.git && \
 USER build
 RUN curl https://sh.rustup.rs -sSf \
         | sh -s -- -y --default-host $DEFAULT_HOST --default-toolchain nightly
-RUN rustup toolchain add nightly-x86_64-unknown-linux-musl
-RUN false #
+RUN PATH="$PATH:$HOME/.cargo/bin" && rustup target list # toolchain add nightly-x86_64-unknown-linux-musl
 COPY . /home/build/fireplace
 USER root
 RUN chown build:build -R /home/build/fireplace
