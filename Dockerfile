@@ -9,10 +9,10 @@ RUN cat /etc/apt/sources.list | sed 's|deb |deb-src |' > /etc/apt/sources.list.d
 RUN apt-get update
 RUN apt-get dist-upgrade -yq
 RUN apt-get install -yq auto-apt-proxy apt-transport-https apt-utils iproute
-RUN echo "Acquire::http::Proxy \"$CACHING_PROXY\";" | tee -a /etc/apt/apt.conf.d/00proxy
-RUN echo "Acquire::https::Proxy-Auto-Detect \"/usr/bin/auto-apt-proxy\";" | tee -a /etc/apt/apt.conf.d/00proxy
-RUN echo "Acquire::http::Proxy-Auto-Detect \"/usr/bin/auto-apt-proxy\";" | tee /etc/apt/apt.conf.d/auto-apt-proxy.conf
-RUN apt-get install -yq curl build-essential clang rustc cargo rust-src libsystemd-dev libfontconfig1-dev git cmake libclang-dev
+#RUN echo "Acquire::http::Proxy \"$CACHING_PROXY\";" | tee -a /etc/apt/apt.conf.d/00proxy
+#RUN echo "Acquire::https::Proxy-Auto-Detect \"/usr/bin/auto-apt-proxy\";" | tee -a /etc/apt/apt.conf.d/00proxy
+#RUN echo "Acquire::http::Proxy-Auto-Detect \"/usr/bin/auto-apt-proxy\";" | tee /etc/apt/apt.conf.d/auto-apt-proxy.conf
+RUN apt-get install -yq curl build-essential clang rustc cargo rust-src libsystemd-dev libfontconfig1-dev git cmake libclang-dev libxcb-*-dev
 RUN apt-get build-dep -yq weston
 RUN git clone https://github.com/Cloudef/wlc.git && \
         cd wlc && \
@@ -28,5 +28,6 @@ USER root
 RUN chown build:build -R /home/build/fireplace
 USER build
 WORKDIR /home/build/fireplace/
+RUN ls /usr/lib/
 CMD PATH="$PATH:$HOME/.cargo/bin" && make docker-deb
 #$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin
