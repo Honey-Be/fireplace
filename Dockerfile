@@ -5,7 +5,6 @@ RUN adduser -h /home/build -s /bin/bash -D build build
 #RUN cat /etc/apt/sources.list | sed 's|deb |deb-src |' > /etc/apt/sources.list.d/source.list
 RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
 RUN apk update
-RUN apk search xkbcommon
 RUN apk add bash \
         curl \
         clang \
@@ -67,6 +66,6 @@ RUN chown build:build -R /home/build/fireplace
 USER build
 WORKDIR /home/build/fireplace/
 RUN ls /usr/lib/
-RUN PATH="$PATH:$HOME/.cargo/bin" && make docker-deb
+RUN PATH="$PATH:$HOME/.cargo/bin" && make build
 CMD bash
 #$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin
