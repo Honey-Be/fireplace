@@ -1,30 +1,66 @@
-FROM debian:experimental
-ARG DEBIAN_FRONTEND="noninteractive"
-ARG CACHING_PROXY="http://172.17.0.2:3142/"
+FROM alpine:edge
 ARG DEFAULT_HOST="x86_64-unknown-linux-gnu"
-ENV DEBIAN_FRONTEND="noninteractive" LANG="C.UTF-8" LC_ALL="C.UTF-8"
-RUN adduser --home /home/build --shell /bin/bash --disabled-password --gecos "build" build
-RUN adduser build sudo
-RUN cat /etc/apt/sources.list | sed 's|deb |deb-src |' > /etc/apt/sources.list.d/source.list
-RUN apt-get update
-RUN apt-get dist-upgrade -yq
-RUN apt-get install -yq auto-apt-proxy apt-transport-https apt-utils iproute
-#RUN echo "Acquire::http::Proxy \"$CACHING_PROXY\";" | tee -a /etc/apt/apt.conf.d/00proxy
-#RUN echo "Acquire::https::Proxy-Auto-Detect \"/usr/bin/auto-apt-proxy\";" | tee -a /etc/apt/apt.conf.d/00proxy
-#RUN echo "Acquire::http::Proxy-Auto-Detect \"/usr/bin/auto-apt-proxy\";" | tee /etc/apt/apt.conf.d/auto-apt-proxy.conf
-RUN apt-get install -yq curl build-essential clang libsystemd-dev libfontconfig1-dev git cmake libclang-dev libxcb-*-dev
-RUN apt-get build-dep -yq weston
-RUN git clone https://github.com/Cloudef/wlc.git && \
-        cd wlc && \
+RUN adduser -h /home/build -s /bin/bash -D build build
+#RUN adduser build sudo
+#RUN cat /etc/apt/sources.list | sed 's|deb |deb-src |' > /etc/apt/sources.list.d/source.list
+RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
+RUN apk update
+RUN apk search xkbcommon
+RUN apk add bash \
+        curl \
+        clang \
+        git \
+        cmake \
+        make \
+        clang-libs \
+        fontconfig \
+        freetype \
+        libdrm-dev \
+        libinput-dev \
+        libx11-dev \
+        libxcb-dev \
+        xcb-proto \
+        xcb-util-dev \
+        xcb-util-cursor-dev \
+        xcb-util-image-dev \
+        xcb-util-renderutil-dev \
+        xcb-util-wm-dev \
+        xcb-util-xrm-dev \
+        libxfixes-dev \
+        libxkbcommon-dev \
+        libfontenc-dev \
+        pixman-dev \
+        wayland-dev \
+        wayland-protocols \
+        mesa-dev \
+        mesa-egl \
+        mesa-gles \
+        mesa-gbm \
+        mesa-libwayland-egl \
+        eudev-libs \
+        eudev-dev \
+        wlc \
+        zlib-dev \
+        perl \
+        openssl-dev \
+        rust@testing \
+        cargo@testing
+
+RUN git clone https://github.com/rust-lang-nursery/rustup.rs.git && cd rustup.rs && cargo build --release && mv target/release/rustup-init /tmp
+
+WORKDIR /home/build
+
+RUN git clone https://github.com/Cloudef/wlc.git
+RUN cd wlc && \
         git submodule update --init --recursive && \
-        mkdir target && \
-        cd target && \
-        cmake -DCMAKE_BUILD_TYPE=Upstream .. && \
+        mkdir target
+RUN cd wlc/target && \
+        cmake -DCMAKE_BUILD_TYPE=Upstream ..
+RUN cd wlc/target && \
         make install
+RUN bash -c '/tmp/rustup-init -y --default-host $DEFAULT_HOST --default-toolchain nightly'
 USER build
-RUN curl https://sh.rustup.rs -sSf \
-        | sh -s -- -y --default-host $DEFAULT_HOST --default-toolchain nightly
-RUN PATH="$PATH:$HOME/.cargo/bin" && rustup target list # toolchain add nightly-x86_64-unknown-linux-musl
+RUN PATH="$PATH:$HOME/.cargo/bin" #&& rustup target list # toolchain add nightly-x86_64-unknown-linux-musl
 COPY . /home/build/fireplace
 USER root
 RUN chown build:build -R /home/build/fireplace
