@@ -57,8 +57,8 @@ RUN cd wlc/target && \
         cmake -DCMAKE_BUILD_TYPE=Upstream ..
 RUN cd wlc/target && \
         make install
-RUN bash -c '/tmp/rustup-init -y --default-host $DEFAULT_HOST --default-toolchain nightly'
 USER build
+RUN bash -c '/tmp/rustup-init -y --default-host $DEFAULT_HOST --default-toolchain nightly'
 RUN PATH="$PATH:$HOME/.cargo/bin" #&& rustup target list # toolchain add nightly-x86_64-unknown-linux-musl
 COPY . /home/build/fireplace
 USER root
