@@ -12,7 +12,7 @@ build:
 	cd fireplace && cargo build --release && cd ../
 
 docker-rust-static:
-	docker build --force-rm --build-arg "CACHING_PROXY=$(proxy_addr)" -t rust-static .
+	docker build --force-rm --build-arg "CACHING_PROXY=$(proxy_addr)" -f Dockerfile.rust-static -t rust-static .
 
 docker:
 	docker build --force-rm --build-arg "CACHING_PROXY=$(proxy_addr)" -t fireplace-build .
