@@ -44,18 +44,15 @@ RUN apt-get install -y -f adduser \
         libxcb1-dev \
         libxcursor-dev \
         libxkbcommon-dev \
-        libstd-rust-dev \
-        rustc cargo dh-cargo
+        libstd-rust-dev
 RUN adduser --disabled-password --home /home/build --shell /bin/bash --disabled-password --gecos "build" build
 
 #FROM clux/muslrust
 
 COPY . /home/build/fireplace
 
-#USER root
 RUN chown build:build -R /home/build/fireplace
 USER build
-
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly
 WORKDIR /home/build/fireplace/
-RUN make build
-CMD bash
+CMD make build
