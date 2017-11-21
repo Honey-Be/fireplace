@@ -27,7 +27,7 @@ docker:
 		--build-arg "CACHING_PROXY=$(proxy_addr)" \
 		-t fireplace-build .
 
-docker-build:
+docker-build: docker
 	docker rm -f fireplace-build; \
 	docker run --name fireplace-build -t fireplace-build
 	rm -rf ./target && mkdir -p ./target
@@ -41,7 +41,7 @@ docker-clobber:
 install:
 	install target/release/fireplace /usr/local/bin/fireplace
 	install fireplace.yaml /etc/fireplace/fireplace.yaml
-	install fireplace.desktop /usr/share/wayland-sessions/
+	install fireplace.desktop /usr/share/wayland-sessions/fireplace.desktop
 
 checkinstall:
 	checkinstall -y \
