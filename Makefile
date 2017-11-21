@@ -2,6 +2,9 @@
 #export proxy_addr := http://192.168.1.98:3142
 export distro = devuan
 
+export RUSTPATH = $(HOME)/.cargo/bin
+export PATH = "$(PATH):$(RUSTPATH)"
+
 dummy:
 
 clean:
