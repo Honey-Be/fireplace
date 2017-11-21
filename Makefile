@@ -9,7 +9,7 @@ clean:
 	cd fireplace && cargo clean && cd ../
 
 build:
-	cd fireplace && cargo build --target x86_64-unknown-linux-musl --release && cd ../
+	cd fireplace && cargo build ---release && cd ../
 
 docker-rust-static:
 	docker build --force-rm --build-arg "CACHING_PROXY=$(proxy_addr)" -f Dockerfile.rust-static -t rust-static .
