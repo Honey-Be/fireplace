@@ -49,12 +49,9 @@ RUN apt-get install -y -f adduser \
         libxkbcommon-dev \
         libclang-dev
 RUN adduser --disabled-password --home /home/build --shell /bin/bash --disabled-password --gecos "build" build
-
-#FROM clux/muslrust
-
 COPY . /home/build/fireplace
 WORKDIR /home/build/fireplace/
-RUN make wlc-install
+RUN make wlc && make wlc-install
 RUN chown build:build -R /home/build/
 USER build
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain nightly

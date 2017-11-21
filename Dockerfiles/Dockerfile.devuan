@@ -48,9 +48,6 @@ RUN apt-get install -y -f adduser \
         libxkbcommon-dev \
         libclang-dev
 RUN adduser --disabled-password --home /home/build --shell /bin/bash --disabled-password --gecos "build" build
-
-#FROM clux/muslrust
-
 COPY . /home/build/fireplace
 WORKDIR /home/build/fireplace/
 RUN make wlc && make wlc-install
