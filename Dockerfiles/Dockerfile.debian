@@ -10,6 +10,7 @@ RUN apt-get install -y -f adduser \
         curl \
         git \
         cmake \
+        checkinstall \
         libegl1-mesa-dev \
         libwayland-egl1-mesa \
         libwayland-egl1 \
