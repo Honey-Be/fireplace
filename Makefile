@@ -30,7 +30,6 @@ docker-build:
 	rm -rf ./target && mkdir -p ./target
 	docker cp fireplace-build:/home/build/fireplace/target ./target
 	docker rm -f fireplace-build
-	make checkinstall-static
 
 docker-clobber:
 	docker rm -f fireplace-build; \
@@ -77,5 +76,5 @@ version:
 	@echo $(shell grep fireplace_lib Cargo.toml | sed 's|fireplace_lib||' | tr -d ":\",={}pathtofireplacelib_/" | sed 's|    . ||' | tr -d " \n")
 
 docker-deb:
-	make build
+	make docker-build
 	make checkinstall
