@@ -13,15 +13,17 @@ clean:
 	"$(CARGO_PATH)" clean
 	cd fireplace && "$(CARGO_PATH)" clean && cd ../
 
-build: wlc
+build:
 	cd fireplace && "$(CARGO_PATH)" build --release && cd ../
 
-wlc:
-	git clone https://github.com/Enerccio/ewlc
+ewlc:
+	git clone https://github.com/Enerccio/ewlc; \
 	cd ewlc && git submodule update --init --recursive; \
 	mkdir target && cd target; \
 	cmake -DCMAKE_BUILD_TYPE=Upstream ..; \
 	make
+
+wlc: ewlc
 
 wlc-install:
 	cd ewlc/target && make install
