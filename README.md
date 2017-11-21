@@ -127,7 +127,7 @@ cargo build --release --no-default-features
 
 If you have `libclang` in another path then `/usr/lib` you have to provide it:
 ```
-LIBCLANG_PATH=/usr/lib64 cargo build --release
+LIBCLANG_PATH=/usr/lib/clang cargo build --release
 ```
 
 For more ways to disable and enable certain features and other quirks see the [README](https://github.com/Drakulix/fireplace/blob/master/fireplace/README.md) of the fireplace binary.

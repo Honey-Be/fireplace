@@ -4,6 +4,7 @@ export distro ?= debian
 
 export CARGO_PATH = "$(HOME)/.cargo/bin/cargo"
 export PATH += :$(HOME)/.cargo/bin/
+export LIBCLANG_PATH = /usr/lib/clang/
 
 dummy:
 	echo "$(PATH)"
