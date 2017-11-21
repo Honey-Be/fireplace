@@ -40,6 +40,7 @@ RUN apt-get install -y -f adduser \
         libwayland-dev \
         libx11-dev \
         libx11-xcb-dev \
+        libxcb-emwh-dev \
         libxcb-composite0-dev \
         libxcb-image0-dev \
         libxcb-render0-dev \
