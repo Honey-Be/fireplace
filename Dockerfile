@@ -28,7 +28,6 @@ RUN apt-get install -y -f adduser \
         libpangocairo-1.0-0 \
         libpixman-1-dev \
         libpng-dev \
-        libsystemd-dev \
         libudev-dev \
         libwayland-client0 \
         libwayland-cursor0 \
