@@ -27,4 +27,4 @@ default = ["ui", "static"]
 
 static = ["wlc/static", "fireplace_lib/static"]
 ui = ["fireplace_lib/conrod_ui", "font-loader"]
-rustflags = ["-C", "target-feature=+crt-static"]
+
