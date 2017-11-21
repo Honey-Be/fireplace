@@ -43,8 +43,7 @@ RUN apt-get install -y -f adduser \
         libxcb-xkb-dev \
         libxcb1-dev \
         libxcursor-dev \
-        libxkbcommon-dev \
-        libstd-rust-dev
+        libxkbcommon-dev
 RUN adduser --disabled-password --home /home/build --shell /bin/bash --disabled-password --gecos "build" build
 
 #FROM clux/muslrust
