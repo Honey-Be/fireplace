@@ -3,9 +3,10 @@
 export distro ?= debian
 
 export CARGO_PATH = "$(HOME)/.cargo/bin/cargo"
-#export PATH += "$(RUSTPATH)"
+export PATH += ":$(HOME)/.cargo/bin/"
 
 dummy:
+	echo "$(PATH)"
 
 clean:
 	rm -rf doc-pak description-pak
@@ -17,7 +18,7 @@ build: wlc
 
 wlc:
 	git clone https://github.com/Enerccio/ewlc
-	git submodule update --init --recursive
+	cd ewlc && git submodule update --init --recursive
 	mkdir target && cd target; \
 	cmake -DCMAKE_BUILD_TYPE=Upstream ..; \
 	make
