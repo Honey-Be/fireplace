@@ -24,7 +24,7 @@ wlc:
 	make
 
 wlc-install:
-	cd ewlc && make install
+	cd ewlc/target && make install
 
 docker-rust-static:
 	docker build --force-rm \
