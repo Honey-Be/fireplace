@@ -7,6 +7,7 @@ ENV DEBIAN_FRONTEND="noninteractive" LANG="C.UTF-8" LC_ALL="C.UTF-8"
 ENV CACHING_PROXY=""
 RUN apt-get purge -y nano && apt-get update && apt-get dist-upgrade -y
 RUN apt-get install -y -f adduser \
+        curl \
         libegl1-mesa-dev \
         libwayland-egl1-mesa \
         libwayland-egl1 \

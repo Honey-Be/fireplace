@@ -13,10 +13,16 @@ build:
 	cd fireplace && cargo build --release && cd ../
 
 docker-rust-static:
-	docker build --force-rm -f "Dockerfiles/Dockerfile.$(distro)" --build-arg "CACHING_PROXY=$(proxy_addr)" -t rust-static .
+	docker build --force-rm \
+		-f "Dockerfiles/Dockerfile.$(distro)" \
+		--build-arg "CACHING_PROXY=$(proxy_addr)" \
+		-t rust-static .
 
 docker:
-	docker build --force-rm -f "Dockerfiles/Dockerfile.$(distro)" --build-arg "CACHING_PROXY=$(proxy_addr)" -t fireplace-build .
+	docker build --force-rm \
+		-f "Dockerfiles/Dockerfile.$(distro)" \
+		--build-arg "CACHING_PROXY=$(proxy_addr)" \
+		-t fireplace-build .
 
 docker-build:
 	docker rm -f fireplace-build; \
