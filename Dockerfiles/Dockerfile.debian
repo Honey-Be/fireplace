@@ -13,6 +13,7 @@ RUN apt-get install -y -f adduser \
         libegl1-mesa-dev \
         libwayland-egl1-mesa \
         libwayland-egl1 \
+        libgles2-mesa-dev \
         libgles2-mesa \
         libgles2 \
         libc6 \
