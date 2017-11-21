@@ -2,18 +2,18 @@
 #export proxy_addr := http://192.168.1.98:3142
 export distro = devuan
 
-export RUSTPATH = $(HOME)/.cargo/bin
+export CARGO_PATH = $(HOME)/.cargo/bin/cargo
 #export PATH += "$(RUSTPATH)"
 
 dummy:
 
 clean:
 	rm -rf doc-pak description-pak
-	cargo clean
-	cd fireplace && cargo clean && cd ../
+	"$(CARGO_PATH)" clean
+	cd fireplace && "$(CARGO_PATH)" clean && cd ../
 
 build:
-	cd fireplace && cargo build --release && cd ../
+	cd fireplace && "$(CARGO_PATH)" build --release && cd ../
 
 docker-rust-static:
 	docker build --force-rm \
