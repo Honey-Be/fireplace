@@ -3,7 +3,7 @@
 export distro = devuan
 
 export RUSTPATH = $(HOME)/.cargo/bin
-export PATH = "$(PATH):$(RUSTPATH)"
+export PATH += "$(RUSTPATH)"
 
 dummy:
 
