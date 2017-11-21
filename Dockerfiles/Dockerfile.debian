@@ -53,6 +53,6 @@ COPY . /home/build/fireplace
 
 RUN chown build:build -R /home/build/fireplace
 USER build
-RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain nightly
 WORKDIR /home/build/fireplace/
 CMD make build
