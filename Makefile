@@ -1,6 +1,6 @@
 
 #export proxy_addr := http://192.168.1.98:3142
-export distro = debian
+export distro ?= debian
 
 export CARGO_PATH = "$(HOME)/.cargo/bin/cargo"
 #export PATH += "$(RUSTPATH)"
@@ -12,8 +12,15 @@ clean:
 	"$(CARGO_PATH)" clean
 	cd fireplace && "$(CARGO_PATH)" clean && cd ../
 
-build:
+build: wlc
 	cd fireplace && "$(CARGO_PATH)" build --release && cd ../
+
+wlc:
+	git clone https://github.com/Enerccio/ewlc
+	git submodule update --init --recursive
+	mkdir target && cd target; \
+	cmake -DCMAKE_BUILD_TYPE=Upstream ..; \
+	make
 
 docker-rust-static:
 	docker build --force-rm \
