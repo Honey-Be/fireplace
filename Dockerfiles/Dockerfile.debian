@@ -48,7 +48,8 @@ RUN apt-get install -y -f adduser \
         libxcb1-dev \
         libxcursor-dev \
         libxkbcommon-dev \
-        libclang-dev
+        libclang-dev \
+        wayland-protocols
 RUN adduser --disabled-password --home /home/build --shell /bin/bash --disabled-password --gecos "build" build
 COPY . /home/build/fireplace
 WORKDIR /home/build/fireplace/
