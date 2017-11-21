@@ -3,7 +3,7 @@
 export distro ?= debian
 
 export CARGO_PATH = "$(HOME)/.cargo/bin/cargo"
-export PATH += ":$(HOME)/.cargo/bin/"
+export PATH += :$(HOME)/.cargo/bin/
 
 dummy:
 	echo "$(PATH)"
