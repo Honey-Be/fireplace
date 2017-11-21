@@ -23,7 +23,7 @@ wlc:
 	cmake -DCMAKE_BUILD_TYPE=Upstream ..; \
 	make
 
-wlc-install: wlc
+wlc-install:
 	cd ewlc && make install
 
 docker-rust-static:
