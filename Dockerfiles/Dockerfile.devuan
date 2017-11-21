@@ -9,6 +9,7 @@ RUN apt-get purge -y nano && apt-get update && apt-get dist-upgrade -y
 RUN apt-get install -y -f adduser \
         curl \
         git \
+        cmake \
         libegl1-mesa-dev \
         libwayland-egl1-mesa \
         libwayland-egl1 \

@@ -26,6 +26,22 @@ wlc:
 wlc-install:
 	cd ewlc/target && make install
 
+wlc-checkinstall:
+	cd ewlc/target && \
+	checkinstall -y \
+		--install=no \
+		--pkgname=wlc \
+		--pkgversion=2.0.1 \
+		--pkglicense=mit \
+		--pkggroup=x11 \
+		--maintainer=problemsolver@openmailbox.org \
+		--pkgsource=ewlc \
+		--deldoc=yes \
+		--deldesc=yes \
+		--delspec=yes \
+		--backup=no \
+		--pakdir=..
+
 docker-rust-static:
 	docker build --force-rm \
 		-f "Dockerfiles/Dockerfile.$(distro)" \
