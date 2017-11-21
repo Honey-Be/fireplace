@@ -9,7 +9,7 @@ dummy:
 	echo "$(PATH)"
 
 clean:
-	rm -rf doc-pak description-pak
+	rm -rf doc-pak description-pak ewlc
 	"$(CARGO_PATH)" clean
 	cd fireplace && "$(CARGO_PATH)" clean && cd ../
 
@@ -18,7 +18,7 @@ build: wlc
 
 wlc:
 	git clone https://github.com/Enerccio/ewlc
-	cd ewlc && git submodule update --init --recursive
+	cd ewlc && git submodule update --init --recursive; \
 	mkdir target && cd target; \
 	cmake -DCMAKE_BUILD_TYPE=Upstream ..; \
 	make
