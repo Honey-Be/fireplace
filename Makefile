@@ -21,7 +21,7 @@ wlc:
 	cd ewlc && git submodule update --init --recursive
 	mkdir target && cd target; \
 	cmake -DCMAKE_BUILD_TYPE=Upstream ..; \
-	make
+	make && make install
 
 docker-rust-static:
 	docker build --force-rm \

@@ -52,9 +52,9 @@ RUN adduser --disabled-password --home /home/build --shell /bin/bash --disabled-
 #FROM clux/muslrust
 
 COPY . /home/build/fireplace
-
+WORKDIR /home/build/fireplace/
+RUN make wlc
 RUN chown build:build -R /home/build/
 USER build
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain nightly
-WORKDIR /home/build/fireplace/
 CMD export PATH="$PATH:$HOME/.cargo/bin"; make build
