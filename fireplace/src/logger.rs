@@ -3,7 +3,7 @@
 use slog;
 use slog::{DrainExt, Duplicate, Level, LevelFilter};
 use slog_html;
-use slog_journald;
+use slog_syslog;
 use slog_scope;
 use slog_stdlog;
 use slog_stream;
@@ -72,7 +72,7 @@ pub fn init(config: Logging) {
         Color::Auto => b.auto_color(),
     };
 
-    let always = Duplicate::new(LevelFilter::new(slog_journald::JournaldDrain, Level::Debug).ignore_err(),
+    let always = Duplicate::new(LevelFilter::new(slog_syslog::Streamer3164, Level::Debug).ignore_err(),
                                 LevelFilter::new(c.build(), Level::Info).ignore_err())
             .ignore_err();
 
