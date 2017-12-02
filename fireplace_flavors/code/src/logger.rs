@@ -63,7 +63,7 @@ pub fn init(config: Logging) {
         Color::Auto => b.auto_color(),
     };
 
-    let always = Duplicate::new(LevelFilter::new(slog_syslog::Streamer3164, Level::Debug).ignore_err(),
+    let always = Duplicate::new(LevelFilter::new(slog_syslog::unix_3164(slog_syslog::Facility::LOG_SYSLOG), Level::Debug).ignore_err(),
                                 LevelFilter::new(c.build(), Level::Info).ignore_err())
             .ignore_err();
 

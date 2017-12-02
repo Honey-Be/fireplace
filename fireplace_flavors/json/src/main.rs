@@ -7,7 +7,7 @@ extern crate serde_derive;
 extern crate slog;
 extern crate slog_scope;
 extern crate slog_html;
-extern crate slog_journald;
+extern crate slog_syslog;
 extern crate slog_stdlog;
 extern crate slog_stream;
 extern crate slog_term;
