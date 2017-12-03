@@ -71,9 +71,11 @@ pub fn init(config: Logging) {
         Color::Auto => b.auto_color(),
     };
 
-	let always = Duplicate::new(LevelFilter::new(slog_syslog::unix_3164(slog_syslog::Facility::LOG_SYSLOG), Level::Debug).ignore_err(),
+	let syslog = LevelFilter::new(slog_syslog::unix_3164(slog_syslog::Facility::LOG_USER).unwrap();
+    let always = Duplicate::new(syslog, Level::Debug).ignore_err(),
                                   LevelFilter::new(c.build(), Level::Info).ignore_err())
               .ignore_err();
+
 
     let root = if let Some(path) = config.file {
         let file = OpenOptions::new()
