@@ -25,6 +25,6 @@ serde_yaml = "0.6"
 [features]
 default = ["ui", "static"]
 
-static = ["wlc/static", "fireplace_lib/static"]
+static = ["wlc-with_elogind/static", "fireplace_lib/static"]
 ui = ["fireplace_lib/conrod_ui", "font-loader"]
 

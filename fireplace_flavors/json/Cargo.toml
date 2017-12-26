@@ -25,5 +25,5 @@ serde_json = "0.9"
 [features]
 default = ["conrod_ui", "static"]
 
-static = ["wlc/static", "fireplace_lib/static"]
+static = ["wlc-with_elogind/static", "fireplace_lib/static"]
 conrod_ui = ["fireplace_lib/conrod_ui"]
